@@ -1,0 +1,58 @@
+public class Main {
+
+    // الكلاس الأساسي (Immutable-style)
+    static class Meal {
+        private final String mainDish;
+        private final String drink;
+        private final String side;
+
+        private Meal(Builder builder) {
+            this.mainDish = builder.mainDish;
+            this.drink = builder.drink;
+            this.side = builder.side;
+        }
+
+        public void showMeal() {
+            System.out.println("Main Dish: " + mainDish);
+            System.out.println("Drink: " + drink);
+            System.out.println("Side: " + side);
+        }
+
+        // Builder الداخلي
+        public static class Builder {
+            private String mainDish;
+            private String drink;
+            private String side;
+
+            public Builder mainDish(String mainDish) {
+                this.mainDish = mainDish;
+                return this;
+            }
+
+            public Builder drink(String drink) {
+                this.drink = drink;
+                return this;
+            }
+
+            public Builder side(String side) {
+                this.side = side;
+                return this;
+            }
+
+            public Meal build() {
+                return new Meal(this);
+            }
+        }
+    }
+
+    // التشغيل
+    public static void main(String[] args) {
+        Meal meal = new Meal.Builder()
+                .mainDish("Burger")
+                .drink("Cola")
+                .side("Fries")
+                .build();
+
+        meal.showMeal();
+    }
+}
